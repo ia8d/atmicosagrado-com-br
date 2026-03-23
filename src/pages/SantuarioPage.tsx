@@ -9,7 +9,7 @@ const meditacoes = [
   { nome: "Conexão com Kuan Yin", icon: Heart, desbloqueada: true },
   { nome: "Ativação dos Chakras", icon: Sparkles, desbloqueada: true },
   { nome: "Jornada Lunar", icon: Moon, desbloqueada: false },
-  { nome: "Despertar do Sagrado", icon: Lotus, desbloqueada: false },
+  { nome: "Despertar do Sagrado", icon: Flower2, desbloqueada: false },
   { nome: "Cura do Útero", icon: Heart, desbloqueada: false },
 ];
 
