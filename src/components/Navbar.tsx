@@ -36,18 +36,20 @@ const Navbar = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-sm font-body text-muted-foreground hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-primary after:scale-x-0 after:origin-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-left"
-            >
-              {item.label}
-            </a>
-          ))}
-          <a href="#agendar" className="btn-mystic text-sm px-6 py-2.5">
+          {navItems.map((item) =>
+            item.href.startsWith("/#") ? (
+              <a key={item.href} href={item.href} className="text-sm font-body text-muted-foreground hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-primary after:scale-x-0 after:origin-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-left">
+                {item.label}
+              </a>
+            ) : (
+              <Link key={item.href} to={item.href} className="text-sm font-body text-muted-foreground hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-primary after:scale-x-0 after:origin-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-left">
+                {item.label}
+              </Link>
+            )
+          )}
+          <Link to="/agendar" className="btn-mystic text-sm px-6 py-2.5">
             Agendar Sessão
-          </a>
+          </Link>
         </div>
 
         {/* Mobile toggle */}
