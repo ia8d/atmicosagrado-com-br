@@ -6,6 +6,7 @@ import blogRadiestesia from "@/assets/blog-radiestesia.jpg";
 
 const posts = [
   {
+    id: "reiki-principios",
     image: blogReiki,
     tag: "Reiki",
     title: "Os 5 Princípios do Reiki para Transformar o Seu Dia",
