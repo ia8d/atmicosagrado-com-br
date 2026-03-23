@@ -46,7 +46,7 @@ const SantuarioPage = () => {
           {/* Meditações */}
           <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="mb-12">
             <h2 className="font-display text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-              <Lotus className="w-6 h-6 text-primary" /> Sua Jornada
+              <Flower2 className="w-6 h-6 text-primary" /> Sua Jornada
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {meditacoes.map((m, i) => (
