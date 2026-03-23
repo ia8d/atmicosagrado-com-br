@@ -27,7 +27,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 group">
+        <Link to="/" className="flex items-center gap-2 group">
           <Sparkles className="w-6 h-6 text-primary transition-transform duration-300 group-hover:rotate-12" />
           <span className="font-display text-xl font-semibold text-foreground">
             Átmico
