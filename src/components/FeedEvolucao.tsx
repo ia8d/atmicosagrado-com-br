@@ -13,6 +13,7 @@ const posts = [
     excerpt: "Descubra como aplicar a sabedoria milenar do Reiki na sua rotina diária.",
   },
   {
+    id: "sagrado-feminino-ciclos",
     image: blogFeminino,
     tag: "Sagrado Feminino",
     title: "Honrando os Ciclos: A Sabedoria da Lua Interior",
