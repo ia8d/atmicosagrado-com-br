@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { motion } from "framer-motion";
 import blogReiki from "@/assets/blog-reiki.jpg";
@@ -6,18 +7,21 @@ import blogRadiestesia from "@/assets/blog-radiestesia.jpg";
 
 const posts = [
   {
+    id: "reiki-principios",
     image: blogReiki,
     tag: "Reiki",
     title: "Os 5 Princípios do Reiki para Transformar o Seu Dia",
     excerpt: "Descubra como aplicar a sabedoria milenar do Reiki na sua rotina diária.",
   },
   {
+    id: "sagrado-feminino-ciclos",
     image: blogFeminino,
     tag: "Sagrado Feminino",
     title: "Honrando os Ciclos: A Sabedoria da Lua Interior",
     excerpt: "Conecte-se com as fases lunares e desperte o poder do seu ciclo sagrado.",
   },
   {
+    id: "radiestesia-pendulo",
     image: blogRadiestesia,
     tag: "Radiestesia",
     title: "Como o Pêndulo Pode Revelar Bloqueios Energéticos",
@@ -49,12 +53,12 @@ const FeedEvolucao = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post, i) => (
+            <Link to={`/blog/${post.id}`} key={post.id}>
             <motion.article
-              key={post.title}
               initial={{ opacity: 0, y: 40 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="glass glow-hover group overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2"
+              className="glass glow-hover group overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 h-full"
             >
               <div className="relative overflow-hidden aspect-[4/3]">
                 <img
@@ -76,6 +80,7 @@ const FeedEvolucao = () => {
                 </p>
               </div>
             </motion.article>
+            </Link>
           ))}
         </div>
       </div>

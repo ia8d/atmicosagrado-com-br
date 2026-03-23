@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Sparkles, Heart } from "lucide-react";
 
 const Footer = () => (
@@ -10,9 +11,9 @@ const Footer = () => (
       <p className="text-muted-foreground font-body mb-8 max-w-md mx-auto">
         Agende uma sessão e dê o primeiro passo na sua jornada de cura e autoconhecimento.
       </p>
-      <a href="#" className="btn-mystic text-base inline-block mb-12">
+      <Link to="/agendar" className="btn-mystic text-base inline-block mb-12">
         Agendar Sessão
-      </a>
+      </Link>
       <div className="border-t border-border/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-muted-foreground text-sm font-body">
           © 2026 Portal Átmico Sagrado. Todos os direitos reservados.
