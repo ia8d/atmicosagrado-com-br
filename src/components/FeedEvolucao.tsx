@@ -79,7 +79,7 @@ const FeedEvolucao = () => {
                 </p>
               </div>
             </motion.article>
-          ))}
+            </Link>
         </div>
       </div>
     </section>

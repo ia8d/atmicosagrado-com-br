@@ -64,19 +64,20 @@ const Navbar = () => {
       {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden glass-strong mx-4 mb-4 rounded-2xl p-6 space-y-4">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setIsOpen(false)}
-              className="block text-muted-foreground hover:text-primary transition-colors py-2"
-            >
-              {item.label}
-            </a>
-          ))}
-          <a href="#agendar" className="btn-mystic block text-center text-sm px-6 py-2.5 mt-4">
+          {navItems.map((item) =>
+            item.href.startsWith("/#") ? (
+              <a key={item.href} href={item.href} onClick={() => setIsOpen(false)} className="block text-muted-foreground hover:text-primary transition-colors py-2">
+                {item.label}
+              </a>
+            ) : (
+              <Link key={item.href} to={item.href} onClick={() => setIsOpen(false)} className="block text-muted-foreground hover:text-primary transition-colors py-2">
+                {item.label}
+              </Link>
+            )
+          )}
+          <Link to="/agendar" className="btn-mystic block text-center text-sm px-6 py-2.5 mt-4">
             Agendar Sessão
-          </a>
+          </Link>
         </div>
       )}
     </nav>
