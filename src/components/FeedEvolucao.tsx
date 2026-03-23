@@ -52,12 +52,12 @@ const FeedEvolucao = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post, i) => (
+            <Link to={`/blog/${post.id}`} key={post.id}>
             <motion.article
-              key={post.title}
               initial={{ opacity: 0, y: 40 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="glass glow-hover group overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2"
+              className="glass glow-hover group overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 h-full"
             >
               <div className="relative overflow-hidden aspect-[4/3]">
                 <img
