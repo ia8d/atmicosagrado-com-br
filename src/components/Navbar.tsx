@@ -32,7 +32,7 @@ const Navbar = () => {
           <span className="font-display text-xl font-semibold text-foreground">
             Átmico
           </span>
-        </a>
+        </Link>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
