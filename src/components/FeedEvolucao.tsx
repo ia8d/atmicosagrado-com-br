@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { motion } from "framer-motion";
 import blogReiki from "@/assets/blog-reiki.jpg";
 import blogFeminino from "@/assets/blog-feminino.jpg";
 import blogRadiestesia from "@/assets/blog-radiestesia.jpg";
