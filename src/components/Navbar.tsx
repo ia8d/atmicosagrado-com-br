@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sparkles } from "lucide-react";
 
 const navItems = [
-  { label: "Pilares", href: "#pilares" },
-  { label: "O Oráculo", href: "#oraculo" },
-  { label: "Evolução", href: "#evolucao" },
-  { label: "Agendar", href: "#agendar" },
+  { label: "Pilares", href: "/#pilares" },
+  { label: "O Oráculo", href: "/oraculo" },
+  { label: "Evolução", href: "/#evolucao" },
+  { label: "Agendar", href: "/agendar" },
+  { label: "Santuário", href: "/santuario" },
 ];
 
 const Navbar = () => {
