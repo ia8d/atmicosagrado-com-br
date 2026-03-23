@@ -20,6 +20,7 @@ const posts = [
     excerpt: "Conecte-se com as fases lunares e desperte o poder do seu ciclo sagrado.",
   },
   {
+    id: "radiestesia-pendulo",
     image: blogRadiestesia,
     tag: "Radiestesia",
     title: "Como o Pêndulo Pode Revelar Bloqueios Energéticos",
