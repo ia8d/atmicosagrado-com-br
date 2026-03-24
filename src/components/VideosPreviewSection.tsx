@@ -61,7 +61,6 @@ const VideosPreviewSection = () => {
             </motion.div>
           ))}
         </div>
-        </div>
 
         <div className="text-center">
           <a
