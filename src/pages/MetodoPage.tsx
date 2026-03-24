@@ -69,7 +69,7 @@ const MetodoPage = () => {
             <Sparkles className="w-10 h-10 text-primary mx-auto mb-6 animate-float" />
             <h1 className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4">O Método Átmico</h1>
             <p className="text-muted-foreground font-body text-lg max-w-2xl mx-auto">
-              Uma abordagem intuitiva e integrada de cura. Cada ferramenta é usada conforme a sua energia pede — sem rigidez, com compaixão.
+              Uma abordagem intuitiva e integrada de cura. Cada ferramenta é usada conforme a sua energia pede sem rigidez, com compaixão.
             </p>
           </motion.div>
 
