@@ -4,7 +4,8 @@ import PilaresSection from "@/components/PilaresSection";
 import ServicosSection from "@/components/ServicosSection";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import BlogPreviewSection from "@/components/BlogPreviewSection";
+import ArticlesPreviewSection from "@/components/ArticlesPreviewSection";
+import VideosPreviewSection from "@/components/VideosPreviewSection";
 
 const Index = () => {
   return (
@@ -12,8 +13,9 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <PilaresSection />
+      <ArticlesPreviewSection />
+      <VideosPreviewSection />
       <ServicosSection />
-      <BlogPreviewSection />
       <Footer />
       <FloatingWhatsApp />
     </div>
