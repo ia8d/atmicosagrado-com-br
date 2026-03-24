@@ -4,12 +4,6 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const fluxo = [
-  { icon: Search, titulo: "Consulta", desc: "Oráculo de Kuan Yin revela o mapa energético." },
-  { icon: Stethoscope, titulo: "Diagnóstico", desc: "Radiestesia identifica bloqueios e frequências." },
-  { icon: Zap, titulo: "Intervenção", desc: "Reiki canaliza a cura para onde é necessário." },
-  { icon: BookOpen, titulo: "Recomendação", desc: "Banhos, cristais e práticas para o pós-sessão." },
-];
 
 const servicos = [
   {
