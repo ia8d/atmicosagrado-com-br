@@ -17,7 +17,7 @@ const servicos = [
   {
     icon: Gem,
     nome: "Pílula de Clareza",
-    preco: "R$ 120",
+    preco: "R$ 99",
     duracao: "30 min",
     descricao: "Foco em uma questão específica. Consulta com o Oráculo de Kuan Yin seguida de indicação personalizada de banhos, cristais e práticas de ancoragem para o seu momento.",
     destaques: ["Oráculo de Kuan Yin", "Indicação de banhos e cristais", "Orientação prática"],
@@ -25,7 +25,7 @@ const servicos = [
   {
     icon: ShieldCheck,
     nome: "Imersão Átmica Completa",
-    preco: "R$ 280",
+    preco: "R$ 199",
     duracao: "60 - 80 min",
     descricao: "Sessão integrativa que combina Oráculo, Reiki e Radiestesia para uma limpeza e proteção energética profunda. O Método Átmico em sua expressão plena.",
     destaques: ["Oráculo + Reiki + Radiestesia", "Limpeza e proteção profundas", "Relatório energético completo"],
