@@ -1,32 +1,35 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Sparkles, Heart, Radio, Eye, CalendarIcon, X } from "lucide-react";
+import { ArrowLeft, Sparkles, Search, Stethoscope, ShieldCheck, BookOpen, Zap, Gem, CalendarIcon, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Calendar } from "@/components/ui/calendar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const fluxo = [
+  { icon: Search, titulo: "Consulta", desc: "Oráculo de Kuan Yin revela o mapa energético." },
+  { icon: Stethoscope, titulo: "Diagnóstico", desc: "Radiestesia identifica bloqueios e frequências." },
+  { icon: Zap, titulo: "Intervenção", desc: "Reiki canaliza a cura para onde é necessário." },
+  { icon: BookOpen, titulo: "Recomendação", desc: "Banhos, cristais e práticas para o pós-sessão." },
+];
+
 const servicos = [
   {
-    icon: Heart,
-    nome: "Reiki",
-    preco: "R$ 180",
+    icon: Gem,
+    nome: "Pílula de Clareza",
+    preco: "R$ 120",
+    duracao: "30 min",
+    descricao: "Foco em uma questão específica. Consulta com o Oráculo de Kuan Yin seguida de indicação personalizada de banhos, cristais e práticas de ancoragem para o seu momento.",
+    destaques: ["Oráculo de Kuan Yin", "Indicação de banhos e cristais", "Orientação prática"],
+  },
+  {
+    icon: ShieldCheck,
+    nome: "Imersão Átmica Completa",
+    preco: "R$ 280",
     duracao: "60 min",
-    descricao: "Sessão de cura energética para restaurar o equilíbrio dos chakras, aliviar tensões e promover o bem-estar profundo do corpo e da alma.",
-  },
-  {
-    icon: Radio,
-    nome: "Radiestesia",
-    preco: "R$ 220",
-    duracao: "90 min",
-    descricao: "Mesa Radiônica completa para identificar e corrigir bloqueios energéticos, harmonizar ambientes e alinhar o seu campo vibracional.",
-  },
-  {
-    icon: Eye,
-    nome: "Oráculo de Kuan Yin",
-    preco: "R$ 150",
-    duracao: "45 min",
-    descricao: "Consulta oracular canalizada pela energia compassiva de Kuan Yin. Receba orientações para o seu caminho de cura e autoconhecimento.",
+    descricao: "Sessão integrativa que combina Oráculo, Reiki e Radiestesia para uma limpeza e proteção energética profunda. O Método Átmico em sua expressão plena.",
+    destaques: ["Oráculo + Reiki + Radiestesia", "Limpeza e proteção profundas", "Relatório energético completo"],
+    destaque: true,
   },
 ];
 
@@ -50,29 +53,74 @@ const AgendarPage = () => {
             <ArrowLeft className="w-4 h-4" /> Voltar ao Portal
           </Link>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-16">
+          {/* Hero */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-20">
             <Sparkles className="w-10 h-10 text-primary mx-auto mb-6 animate-float" />
             <h1 className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4">Agende sua Sessão</h1>
-            <p className="text-muted-foreground font-body text-lg max-w-xl mx-auto">Escolha o serviço que ressoa com o seu momento e dê o primeiro passo na sua jornada de cura.</p>
+            <p className="text-muted-foreground font-body text-lg max-w-xl mx-auto">Cada atendimento é único, guiado pela sua energia e pelo Método Átmico.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* A Jornada Átmica */}
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }} className="mb-24">
+            <p className="text-primary font-body text-sm tracking-[0.3em] uppercase text-center mb-3">O Método</p>
+            <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-4">A Jornada Átmica</h2>
+            <p className="text-muted-foreground font-body text-center max-w-2xl mx-auto mb-12">
+              O atendimento é intuitivo e integrado. Oráculo, Reiki e Radiestesia se combinam de forma orgânica conforme a necessidade energética revelada durante a sessão.
+            </p>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {fluxo.map((step, i) => (
+                <motion.div
+                  key={step.titulo}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
+                  className="glass glow-hover p-6 text-center relative"
+                >
+                  {i < fluxo.length - 1 && (
+                    <span className="hidden md:block absolute top-1/2 -right-3 md:-right-4 -translate-y-1/2 text-primary text-xl font-bold">➔</span>
+                  )}
+                  <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mx-auto mb-4">
+                    <step.icon className="w-5 h-5 text-primary-foreground" />
+                  </div>
+                  <h3 className="font-display text-base font-bold text-foreground mb-1">{step.titulo}</h3>
+                  <p className="text-muted-foreground font-body text-xs leading-relaxed">{step.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Service Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {servicos.map((s, i) => (
               <motion.div
                 key={s.nome}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="glass glow-hover p-8 flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-500"
+                transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
+                className={`glass glow-hover p-8 flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-500 relative ${s.destaque ? "ring-1 ring-primary/40" : ""}`}
               >
-                <div className="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_hsl(330_100%_44%/0.4)] transition-shadow duration-500">
+                {s.destaque && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-body font-semibold px-4 py-1 rounded-full">Recomendado</span>
+                )}
+                <div className="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-6 group-hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] transition-shadow duration-500">
                   <s.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
                 <h3 className="font-display text-xl font-bold text-foreground mb-2">{s.nome}</h3>
                 <p className="text-primary font-display text-2xl font-bold mb-1">{s.preco}</p>
                 <p className="text-muted-foreground text-xs font-body mb-4">{s.duracao}</p>
-                <p className="text-muted-foreground font-body text-sm leading-relaxed mb-8 flex-1">{s.descricao}</p>
-                <button onClick={() => openModal(s.nome)} className="btn-mystic w-full text-sm py-3">
+                <p className="text-muted-foreground font-body text-sm leading-relaxed mb-6">{s.descricao}</p>
+
+                <ul className="w-full space-y-2 mb-8 text-left">
+                  {s.destaques.map((d) => (
+                    <li key={d} className="flex items-center gap-2 text-muted-foreground font-body text-xs">
+                      <Sparkles className="w-3 h-3 text-primary shrink-0" />
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+
+                <button onClick={() => openModal(s.nome)} className="btn-mystic w-full text-sm py-3 mt-auto">
                   <CalendarIcon className="w-4 h-4 inline mr-2" /> Agendar
                 </button>
               </motion.div>
@@ -109,7 +157,7 @@ const AgendarPage = () => {
                 <p className="text-foreground font-body text-sm mb-4">
                   Data selecionada: <span className="text-primary font-semibold">{selectedDate.toLocaleDateString("pt-BR")}</span>
                 </p>
-                <button onClick={() => { setModalOpen(false); }} className="btn-mystic w-full text-sm py-3">
+                <button onClick={() => setModalOpen(false)} className="btn-mystic w-full text-sm py-3">
                   Confirmar Agendamento
                 </button>
               </motion.div>

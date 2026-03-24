@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, Instagram, ArrowLeft, Send } from "lucide-react";
+import { Sparkles, Instagram, ArrowLeft, Send, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -86,6 +86,7 @@ const OraculoPage = () => {
                   </div>
                 </div>
 
+                {/* Prévia da resposta */}
                 <blockquote className="font-display text-xl md:text-2xl italic text-foreground leading-relaxed mb-8 pl-6 border-l-2 border-primary/50">
                   "{resultado.texto}"
                 </blockquote>
@@ -94,6 +95,29 @@ const OraculoPage = () => {
                   <p className="text-primary font-body text-sm font-semibold uppercase tracking-wider mb-2">Recomendação</p>
                   <p className="text-foreground font-body leading-relaxed">{resultado.recomendacao}</p>
                 </div>
+
+                {/* CTA Imersão Átmica */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="glass p-6 rounded-2xl border border-primary/20 mb-8"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-6 h-6 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <p className="font-display text-foreground font-semibold text-lg mb-1">Quer ir mais fundo?</p>
+                      <p className="text-muted-foreground font-body text-sm leading-relaxed mb-4">
+                        Para uma visão profunda e limpeza energética, agende sua <span className="text-primary font-semibold">Imersão Átmica Completa</span> — integrando Oráculo, Reiki e Radiestesia em uma sessão transformadora.
+                      </p>
+                      <Link to="/agendar" className="btn-mystic inline-flex items-center gap-2 text-sm px-6 py-3">
+                        Agendar Imersão Átmica
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
 
                 {/* Instagram Embed Placeholder */}
                 <div className="glass p-6 flex flex-col items-center justify-center gap-3 mb-8">
@@ -104,7 +128,7 @@ const OraculoPage = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link to="/agendar" className="btn-mystic text-center flex-1 flex items-center justify-center gap-2">
-                    Agendar Consulta de Mesa Radiônica
+                    Agendar Sessão
                   </Link>
                   <button onClick={() => { setResultado(null); setPergunta(""); }} className="flex-1 glass text-foreground font-body font-semibold py-4 px-6 rounded-full hover:bg-secondary/40 transition-all text-center">
                     Fazer Nova Pergunta
