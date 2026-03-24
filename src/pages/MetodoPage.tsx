@@ -123,36 +123,6 @@ const MetodoPage = () => {
             })}
           </div>
 
-          {/* Seção Terapeutas */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7 }}
-            className="mt-32"
-          >
-            <div className="text-center mb-12">
-              <Users className="w-8 h-8 text-primary mx-auto mb-4" />
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">Quem Somos</h2>
-              <p className="text-muted-foreground font-body max-w-xl mx-auto">
-                Por trás do Portal Átmico estão pessoas reais, movidas pelo propósito de tornar a cura energética acessível e acolhedora.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {terapeutas.map((t) => (
-                <div key={t.nome} className="glass glow-hover p-8 text-center">
-                  {/* Placeholder avatar */}
-                  <div className="w-28 h-28 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center text-primary-foreground font-display text-3xl font-bold">
-                    {t.nome[0]}
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-foreground mb-1">{t.nome}</h3>
-                  <p className="text-primary font-body text-sm mb-4">{t.papel}</p>
-                  <p className="text-muted-foreground font-body text-sm leading-relaxed">{t.bio}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
 
           {/* CTA */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="text-center mt-20">
