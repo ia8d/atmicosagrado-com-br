@@ -1,32 +1,69 @@
 import { useState } from "react";
-import { Search, Sparkles } from "lucide-react";
+import { Search, Sparkles, ShieldCheck, CalendarIcon } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const respostas = [
-  "A cura que você busca já vive em você. Permita-se sentir.",
-  "O universo conspira a seu favor. Confie no processo.",
-  "Seu coração sabe o caminho. Silencie a mente e ouça.",
-  "A compaixão é a chave. Comece por si mesma.",
-  "Cada ciclo traz renovação. Honre o que precisa partir.",
-  "A luz que você procura já brilha dentro de você.",
-  "Permita que a vulnerabilidade seja sua maior força.",
-  "O sagrado habita nos pequenos momentos de presença.",
+  {
+    texto: "A cura que você busca já vive em você. Permita-se sentir. O caminho para a plenitude não está fora, está na coragem de olhar para dentro com compaixão.",
+    recomendacao: "Recomendo uma sessão de Mesa Radiônica para desbloquear os canais energéticos que estão impedindo o fluxo da sua cura interior.",
+    servico: "imersao",
+  },
+  {
+    texto: "O universo conspira a seu favor. Confie no processo. Cada desafio é um portal de transformação que a vida oferece para que você se torne quem realmente é.",
+    recomendacao: "Uma prática de Reiki pode ajudá-la a alinhar a energia com a frequência do universo e sentir essa confiança no corpo.",
+    servico: "reiki",
+  },
+  {
+    texto: "Seu coração sabe o caminho. Silencie a mente e ouça. A sabedoria ancestral que habita em você é mais antiga que qualquer dúvida.",
+    recomendacao: "Sugiro uma consulta com o Oráculo de Kuan Yin para aprofundar essa conexão com a voz do seu coração.",
+    servico: "pilula",
+  },
+  {
+    texto: "A compaixão é a chave. Comece por si mesma. Quando você se permite receber, o universo inteiro se reorganiza ao seu redor.",
+    recomendacao: "Uma sessão de Reiki vai ajudar a abrir o canal do amor-próprio e restaurar a energia do seu campo áurico.",
+    servico: "reiki",
+  },
+  {
+    texto: "Cada ciclo traz renovação. Honre o que precisa partir. A luz que você procura já brilha dentro de você.",
+    recomendacao: "A Imersão Átmica Completa é ideal para este momento de transição — integrando Oráculo, Reiki e Radiestesia.",
+    servico: "imersao",
+  },
+  {
+    texto: "Permita que a vulnerabilidade seja sua maior força. O sagrado habita nos pequenos momentos de presença.",
+    recomendacao: "Uma Pílula de Clareza pode trazer a orientação prática que você precisa agora, com banhos e cristais personalizados.",
+    servico: "pilula",
+  },
 ];
+
+const waLinks: Record<string, string> = {
+  reiki:
+    "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20Reiki.",
+  pilula:
+    "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Vi%20no%20portal%20e%20gostaria%20de%20agendar%20uma%20P%C3%ADlula%20de%20Clareza.",
+  imersao:
+    "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Sinto%20que%20meu%20templo%20precisa%20de%20uma%20limpeza%20profunda.%20Gostaria%20de%20agendar%20a%20Imers%C3%A3o%20%C3%81tmica%20Completa.",
+};
 
 const OraculoSection = () => {
   const { ref, isVisible } = useScrollReveal();
   const [query, setQuery] = useState("");
-  const [resposta, setResposta] = useState("");
-  const [isRevealing, setIsRevealing] = useState(false);
+  const [resultado, setResultado] = useState<(typeof respostas)[0] | null>(null);
+  const [isChanneling, setIsChanneling] = useState(false);
 
   const handleConsultar = () => {
-    if (!query.trim()) return;
-    setIsRevealing(true);
+    if (!query.trim() || isChanneling) return;
+    setIsChanneling(true);
+    setResultado(null);
     setTimeout(() => {
-      setResposta(respostas[Math.floor(Math.random() * respostas.length)]);
-      setIsRevealing(false);
-    }, 1500);
+      setResultado(respostas[Math.floor(Math.random() * respostas.length)]);
+      setIsChanneling(false);
+    }, 2000);
+  };
+
+  const handleNovaPergunta = () => {
+    setResultado(null);
+    setQuery("");
   };
 
   return (
@@ -52,6 +89,7 @@ const OraculoSection = () => {
           </p>
         </motion.div>
 
+        {/* Search input */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -70,6 +108,7 @@ const OraculoSection = () => {
             />
             <button
               onClick={handleConsultar}
+              disabled={isChanneling}
               className="btn-mystic text-sm px-6 py-3 shrink-0"
             >
               Consultar
@@ -77,27 +116,118 @@ const OraculoSection = () => {
           </div>
         </motion.div>
 
-        {(isRevealing || resposta) && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mt-8 glass p-8 text-center"
-          >
-            {isRevealing ? (
-              <div className="flex items-center justify-center gap-2">
-                <Sparkles className="w-5 h-5 text-primary animate-spin" />
-                <span className="text-muted-foreground font-body text-sm">
-                  Consultando o universo...
-                </span>
+        {/* Channeling animation */}
+        <AnimatePresence>
+          {isChanneling && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="mt-8 glass p-10 text-center"
+            >
+              <div className="flex flex-col items-center gap-4">
+                <div className="relative">
+                  <Sparkles className="w-10 h-10 text-primary animate-spin" />
+                  <div className="absolute inset-0 w-10 h-10 rounded-full bg-primary/20 animate-ping" />
+                </div>
+                <p className="text-muted-foreground font-body text-sm animate-pulse">
+                  Canalizando a voz do universo...
+                </p>
+                <div className="flex gap-1.5 mt-2">
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      className="w-2 h-2 rounded-full bg-primary/60"
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 1, repeat: Infinity, delay: i * 0.3 }}
+                    />
+                  ))}
+                </div>
               </div>
-            ) : (
-              <p className="font-display text-xl md:text-2xl italic text-foreground leading-relaxed">
-                "{resposta}"
-              </p>
-            )}
-          </motion.div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Detailed result */}
+        <AnimatePresence>
+          {resultado && !isChanneling && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.8 }}
+              className="mt-8"
+            >
+              <div className="glass p-8 md:p-10">
+                {/* Raquel header */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center shadow-[0_0_20px_hsl(330_100%_44%/0.4)]">
+                    <Sparkles className="w-5 h-5 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <p className="font-display text-foreground font-semibold">Raquel — Voz do Oráculo</p>
+                    <p className="text-muted-foreground text-xs font-body">Canalização para você</p>
+                  </div>
+                </div>
+
+                {/* Quote */}
+                <blockquote className="font-display text-xl md:text-2xl italic text-foreground leading-relaxed mb-8 pl-6 border-l-2 border-primary/50">
+                  "{resultado.texto}"
+                </blockquote>
+
+                {/* Recommendation */}
+                <div className="bg-secondary/30 rounded-xl p-6 mb-8">
+                  <p className="text-primary font-body text-sm font-semibold uppercase tracking-wider mb-2">
+                    Recomendação
+                  </p>
+                  <p className="text-foreground font-body leading-relaxed">{resultado.recomendacao}</p>
+                </div>
+
+                {/* CTA Imersão */}
+                <div className="glass p-6 rounded-2xl border border-primary/20 mb-8">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center shrink-0 shadow-[0_0_20px_hsl(330_100%_44%/0.4)]">
+                      <ShieldCheck className="w-6 h-6 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <p className="font-display text-foreground font-semibold text-lg mb-1">Quer ir mais fundo?</p>
+                      <p className="text-muted-foreground font-body text-sm leading-relaxed mb-4">
+                        Para uma visão profunda e limpeza energética, agende sua{" "}
+                        <span className="text-primary font-semibold">Imersão Átmica Completa</span> — integrando Oráculo, Reiki e Radiestesia.
+                      </p>
+                      <a
+                        href={waLinks[resultado.servico]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-mystic inline-flex items-center gap-2 text-sm px-6 py-3 shadow-[0_0_20px_hsl(330_100%_44%/0.4)] hover:shadow-[0_0_35px_hsl(330_100%_44%/0.6)]"
+                      >
+                        <CalendarIcon className="w-4 h-4" /> Agendar Sessão
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href={waLinks[resultado.servico]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-mystic text-center flex-1 flex items-center justify-center gap-2 shadow-[0_0_20px_hsl(330_100%_44%/0.4)]"
+                  >
+                    <CalendarIcon className="w-4 h-4" /> Agendar Agora
+                  </a>
+                  <button
+                    onClick={handleNovaPergunta}
+                    className="flex-1 glass text-foreground font-body font-semibold py-4 px-6 rounded-full hover:bg-secondary/40 transition-all text-center"
+                  >
+                    Fazer Nova Pergunta
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
