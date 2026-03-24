@@ -97,43 +97,6 @@ const AgendarPage = () => {
         </div>
       </main>
 
-      {/* Modal */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setModalOpen(false)} />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative glass-strong p-8 max-w-md w-full z-10"
-          >
-            <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors">
-              <X className="w-5 h-5" />
-            </button>
-            <h3 className="font-display text-2xl font-bold text-foreground mb-2">Agendar {selectedService}</h3>
-            <p className="text-muted-foreground font-body text-sm mb-6">Escolha uma data disponível para a sua sessão.</p>
-            <div className="flex justify-center mb-6">
-              <Calendar
-                mode="single"
-                selected={selectedDate}
-                onSelect={setSelectedDate}
-                disabled={(date) => date < new Date()}
-                className="p-3 pointer-events-auto glass rounded-xl"
-              />
-            </div>
-            {selectedDate && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
-                <p className="text-foreground font-body text-sm mb-4">
-                  Data selecionada: <span className="text-primary font-semibold">{selectedDate.toLocaleDateString("pt-BR")}</span>
-                </p>
-                <button onClick={() => setModalOpen(false)} className="btn-mystic w-full text-sm py-3">
-                  Confirmar Agendamento
-                </button>
-              </motion.div>
-            )}
-          </motion.div>
-        </div>
-      )}
-
       <Footer />
     </div>
   );
