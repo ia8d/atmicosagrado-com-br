@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import PilaresSection from "@/components/PilaresSection";
 import ServicosSection from "@/components/ServicosSection";
-import OraculoSection from "@/components/OraculoSection";
+
 import FeedEvolucao from "@/components/FeedEvolucao";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -12,7 +12,6 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <OraculoSection />
       <PilaresSection />
       <ServicosSection />
       <FeedEvolucao />

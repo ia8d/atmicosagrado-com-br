@@ -14,39 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
-      conteudo_atmico: {
+      posts: {
         Row: {
-          created_at: string
+          category: string | null
+          content: string
+          created_at: string | null
+          excerpt: string | null
           id: string
-          legenda_original: string | null
-          link_original: string | null
-          pilar_sugerido: string | null
-          resumo_ia: string | null
-          tipo_midia: string | null
-          titulo: string | null
-          url_imagem_capa: string | null
+          image_url: string | null
+          published_at: string | null
+          slug: string
+          title: string
         }
         Insert: {
-          created_at?: string
+          category?: string | null
+          content: string
+          created_at?: string | null
+          excerpt?: string | null
           id?: string
-          legenda_original?: string | null
-          link_original?: string | null
-          pilar_sugerido?: string | null
-          resumo_ia?: string | null
-          tipo_midia?: string | null
-          titulo?: string | null
-          url_imagem_capa?: string | null
+          image_url?: string | null
+          published_at?: string | null
+          slug: string
+          title: string
         }
         Update: {
-          created_at?: string
+          category?: string | null
+          content?: string
+          created_at?: string | null
+          excerpt?: string | null
           id?: string
-          legenda_original?: string | null
-          link_original?: string | null
-          pilar_sugerido?: string | null
-          resumo_ia?: string | null
-          tipo_midia?: string | null
-          titulo?: string | null
-          url_imagem_capa?: string | null
+          image_url?: string | null
+          published_at?: string | null
+          slug?: string
+          title?: string
         }
         Relationships: []
       }
@@ -55,7 +55,33 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      buscar_por_texto: {
+        Args: { match_count?: number; texto_busca: string }
+        Returns: {
+          id: string
+          legenda_original: string
+          pilar_sugerido: string
+          resumo_ia: string
+          tipo_midia: string
+          titulo: string
+        }[]
+      }
+      buscar_similar: {
+        Args: {
+          match_count?: number
+          match_threshold?: number
+          query_embedding: string
+        }
+        Returns: {
+          id: string
+          legenda_original: string
+          pilar_sugerido: string
+          resumo_ia: string
+          similarity: number
+          tipo_midia: string
+          titulo: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
