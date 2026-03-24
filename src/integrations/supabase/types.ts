@@ -14,7 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      conteudo_atmico: {
+        Row: {
+          created_at: string
+          id: string
+          legenda_original: string | null
+          link_original: string | null
+          pilar_sugerido: string | null
+          resumo_ia: string | null
+          tipo_midia: string | null
+          titulo: string | null
+          url_imagem_capa: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          legenda_original?: string | null
+          link_original?: string | null
+          pilar_sugerido?: string | null
+          resumo_ia?: string | null
+          tipo_midia?: string | null
+          titulo?: string | null
+          url_imagem_capa?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          legenda_original?: string | null
+          link_original?: string | null
+          pilar_sugerido?: string | null
+          resumo_ia?: string | null
+          tipo_midia?: string | null
+          titulo?: string | null
+          url_imagem_capa?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
