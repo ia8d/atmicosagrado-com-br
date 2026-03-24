@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { extractYouTubeId } from "@/lib/youtube";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -22,7 +21,7 @@ const ShareButtons = ({ title, url }: { title: string; url: string }) => {
   const shareWhatsApp = `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`;
 
   return (
-    <div className="flex items-center gap-3 py-6 border-t border-b border-border">
+    <div className="flex items-center gap-3 py-6 border-t border-border">
       <Share2 className="w-4 h-4 text-muted-foreground" />
       <span className="text-sm text-muted-foreground font-body">Partilhar:</span>
       <a href={shareWhatsApp} target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-full text-xs font-body font-medium glass hover:text-primary transition-colors">
@@ -91,7 +90,6 @@ const BlogPost = () => {
     );
   }
 
-  const ytId = post.video_url ? extractYouTubeId(post.video_url) : null;
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
@@ -101,7 +99,7 @@ const BlogPost = () => {
         <div className="container mx-auto px-6 max-w-3xl">
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 font-body text-sm"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-10 font-body text-sm"
           >
             <ArrowLeft className="w-4 h-4" /> Voltar ao Blog
           </Link>
@@ -111,19 +109,9 @@ const BlogPost = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Video embed or cover image */}
-            {ytId ? (
-              <div className="relative rounded-2xl overflow-hidden mb-8 aspect-video">
-                <iframe
-                  src={`https://www.youtube.com/embed/${ytId}`}
-                  title={post.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </div>
-            ) : post.image_url ? (
-              <div className="relative rounded-2xl overflow-hidden mb-8 aspect-video">
+            {/* Cover image */}
+            {post.image_url && (
+              <div className="relative rounded-2xl overflow-hidden mb-10 aspect-video">
                 <img
                   src={post.image_url}
                   alt={post.title}
@@ -136,11 +124,11 @@ const BlogPost = () => {
                   </span>
                 )}
               </div>
-            ) : null}
+            )}
 
             {/* Meta */}
-            <div className="flex items-center gap-4 text-muted-foreground text-sm font-body mb-6">
-              {post.category && <span>{post.category}</span>}
+            <div className="flex items-center gap-4 text-muted-foreground text-sm font-body mb-4">
+              {post.category && !post.image_url && <span>{post.category}</span>}
               {post.published_at && (
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3 h-3" />
@@ -153,16 +141,13 @@ const BlogPost = () => {
               )}
             </div>
 
-            <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-8 leading-tight">
+            <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-12 leading-tight">
               {post.title}
             </h1>
 
-            {/* Share */}
-            <ShareButtons title={post.title} url={currentUrl} />
-
             {/* Content */}
             <div
-              className="mt-10 prose prose-invert prose-lg max-w-none font-body
+              className="prose prose-invert prose-lg max-w-none font-body
                 prose-headings:font-display prose-headings:text-foreground
                 prose-p:text-foreground/90 prose-p:leading-relaxed
                 prose-a:text-primary prose-a:no-underline hover:prose-a:underline
@@ -172,8 +157,8 @@ const BlogPost = () => {
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
-            {/* Bottom share */}
-            <div className="mt-12">
+            {/* Share — single block at the bottom */}
+            <div className="mt-14">
               <ShareButtons title={post.title} url={currentUrl} />
             </div>
           </motion.article>

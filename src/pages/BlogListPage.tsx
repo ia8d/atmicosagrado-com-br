@@ -77,7 +77,7 @@ const BlogListPage = () => {
                   >
                     <Link
                       to={`/blog/${post.slug}`}
-                      className="glass glow-hover group block rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 h-full"
+                      className="glass group block rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 h-full border border-border/50 hover:border-primary/30 shadow-lg shadow-background/50"
                     >
                       <div className="relative overflow-hidden aspect-[4/3]">
                         {thumbnail && (
