@@ -4,15 +4,15 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const FEATURED_VIDEOS = [
   {
-    id: "dQw4w9WgXcQ",
+    id: "_Qm5pYyi5YQ",
     title: "Título do seu vídeo 1",
   },
   {
-    id: "jNQXAC9IVRw",
+    id: "hv1CihzODQA",
     title: "Título do seu vídeo 2",
   },
   {
-    id: "9bZkp7q19f0",
+    id: "o86tvT7Ds3s",
     title: "Título do seu vídeo 3",
   },
 ];
