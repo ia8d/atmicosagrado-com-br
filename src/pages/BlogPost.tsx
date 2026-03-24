@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Instagram, Clock, Tag, Mail, Send } from "lucide-react";
+import { ArrowLeft, Instagram, Clock, Tag, Mail, Send, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -16,6 +16,7 @@ const allPosts = [
     title: "Os 5 Princípios do Reiki para Transformar o Seu Dia",
     date: "20 Mar 2026",
     readTime: "5 min",
+    mediaType: "instagram" as const,
     content: [
       "O Reiki é uma prática milenar de cura energética que nos ensina a canalizar a energia universal para promover o equilíbrio do corpo, mente e espírito. Os seus cinco princípios são pilares que nos guiam no caminho da serenidade.",
       "Só por hoje, não se preocupe. A preocupação é uma energia que bloqueia o fluxo natural da vida. Quando nos libertamos dela, abrimos espaço para que o universo trabalhe a nosso favor.",
@@ -32,6 +33,8 @@ const allPosts = [
     title: "Honrando os Ciclos: A Sabedoria da Lua Interior",
     date: "15 Mar 2026",
     readTime: "7 min",
+    mediaType: "youtube" as const,
+    youtubeId: "dQw4w9WgXcQ",
     content: [
       "O Sagrado Feminino é um convite para reconectar-se com a sabedoria ancestral que habita em cada mulher. Os ciclos menstruais, assim como as fases da lua, carregam ensinamentos profundos sobre criação, maturação, libertação e recolhimento.",
       "Na fase da Lua Nova, somos convidadas ao silêncio e à introspecção. É o momento de plantar sementes de intenção, de olhar para dentro e honrar o vazio fértil que precede toda a criação.",
@@ -47,6 +50,8 @@ const allPosts = [
     title: "Como o Pêndulo Pode Revelar Bloqueios Energéticos",
     date: "10 Mar 2026",
     readTime: "6 min",
+    mediaType: "youtube" as const,
+    youtubeId: "dQw4w9WgXcQ",
     content: [
       "A Radiestesia é a ciência das vibrações. Através de instrumentos como o pêndulo e a mesa radiônica, conseguimos identificar e corrigir desequilíbrios energéticos que afetam a nossa saúde, emoções e até o nosso ambiente.",
       "O pêndulo funciona como uma extensão da nossa intuição. Ele amplifica as micro-movimentações do nosso corpo, que são respostas do sistema nervoso às frequências que nos rodeiam.",
@@ -91,18 +96,33 @@ const BlogPost = () => {
           </Link>
 
           <motion.article initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            {/* Hero Image */}
-            <div className="relative rounded-2xl overflow-hidden mb-8 aspect-video">
-              <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-              <span className="absolute top-6 left-6 px-4 py-1.5 rounded-full text-xs font-body font-semibold text-primary-foreground gradient-bg">
-                {post.tag}
-              </span>
-            </div>
+            {/* Hero: YouTube embed or image */}
+            {post.mediaType === "youtube" && post.youtubeId ? (
+              <div className="relative rounded-2xl overflow-hidden mb-8 aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${post.youtubeId}`}
+                  title={post.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+            ) : (
+              <div className="relative rounded-2xl overflow-hidden mb-8 aspect-video">
+                <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                <span className="absolute top-6 left-6 px-4 py-1.5 rounded-full text-xs font-body font-semibold text-primary-foreground gradient-bg">
+                  {post.tag}
+                </span>
+              </div>
+            )}
 
             {/* Meta */}
             <div className="flex items-center gap-4 text-muted-foreground text-sm font-body mb-6">
-              <span className="flex items-center gap-1"><Tag className="w-3 h-3" /> {post.tag}</span>
+              <span className="flex items-center gap-1">
+                {post.mediaType === "youtube" ? <Play className="w-3 h-3" /> : <Tag className="w-3 h-3" />}
+                {post.mediaType === "youtube" ? "YouTube" : post.tag}
+              </span>
               <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {post.readTime}</span>
               <span>{post.date}</span>
             </div>
@@ -116,12 +136,14 @@ const BlogPost = () => {
               ))}
             </div>
 
-            {/* Instagram Embed Placeholder */}
-            <div className="glass p-8 flex flex-col items-center gap-3 mb-12">
-              <Instagram className="w-8 h-8 text-muted-foreground" />
-              <p className="text-muted-foreground font-body text-sm">Vídeo/Post do Instagram relacionado</p>
-              <span className="text-xs text-muted-foreground/60 font-body">@portal.atmico</span>
-            </div>
+            {/* Instagram Embed Placeholder - only for instagram posts */}
+            {post.mediaType === "instagram" && (
+              <div className="glass p-8 flex flex-col items-center gap-3 mb-12">
+                <Instagram className="w-8 h-8 text-muted-foreground" />
+                <p className="text-muted-foreground font-body text-sm">Vídeo/Post do Instagram relacionado</p>
+                <span className="text-xs text-muted-foreground/60 font-body">@portal.atmico</span>
+              </div>
+            )}
 
             {/* Newsletter */}
             <div className="glass p-8 mb-16 text-center">
@@ -155,9 +177,24 @@ const BlogPost = () => {
               {related.map((r) => (
                 <Link key={r.id} to={`/blog/${r.id}`} className="glass glow-hover group overflow-hidden transition-all duration-500 hover:-translate-y-1">
                   <div className="relative overflow-hidden aspect-[16/9]">
-                    <img src={r.image} alt={r.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <img
+                      src={r.mediaType === "youtube" && r.youtubeId
+                        ? `https://img.youtube.com/vi/${r.youtubeId}/hqdefault.jpg`
+                        : r.image}
+                      alt={r.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-body font-semibold text-primary-foreground gradient-bg">{r.tag}</span>
+                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-body font-semibold text-primary-foreground gradient-bg flex items-center gap-1">
+                      {r.mediaType === "youtube" ? <><Play className="w-3 h-3" fill="currentColor" /> YouTube</> : r.tag}
+                    </span>
+                    {r.mediaType === "youtube" && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center">
+                          <Play className="w-5 h-5 text-primary-foreground ml-0.5" fill="currentColor" />
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div className="p-5">
                     <h3 className="font-display text-base font-semibold text-foreground group-hover:text-primary transition-colors">{r.title}</h3>
