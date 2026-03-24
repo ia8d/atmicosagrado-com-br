@@ -8,7 +8,7 @@ const navItems = [
   { label: "O Oráculo", href: "/oraculo" },
   { label: "Evolução", href: "/#evolucao" },
   { label: "Agendar", href: "/agendar" },
-  { label: "Santuário", href: "/santuario" },
+  
 ];
 
 const Navbar = () => {
