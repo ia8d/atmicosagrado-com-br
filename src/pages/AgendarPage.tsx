@@ -50,7 +50,7 @@ const AgendarPage = () => {
       <main className="pt-28 pb-24">
         <div className="container mx-auto px-6 max-w-5xl">
           <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 font-body text-sm">
-            <ArrowLeft className="w-4 h-4" /> Voltar ao Portal
+            <ArrowLeft className="w-4 h-4" /> Voltar
           </Link>
 
           {/* Hero */}
