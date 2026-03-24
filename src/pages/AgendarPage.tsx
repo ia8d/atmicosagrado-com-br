@@ -1,17 +1,9 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Sparkles, Search, Stethoscope, ShieldCheck, BookOpen, Zap, Gem, CalendarIcon, X } from "lucide-react";
+import { ArrowLeft, Sparkles, ShieldCheck, Gem, CalendarIcon } from "lucide-react";
 import { motion } from "framer-motion";
-import { Calendar } from "@/components/ui/calendar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const fluxo = [
-  { icon: Search, titulo: "Consulta", desc: "Oráculo de Kuan Yin revela o mapa energético." },
-  { icon: Stethoscope, titulo: "Diagnóstico", desc: "Radiestesia identifica bloqueios e frequências." },
-  { icon: Zap, titulo: "Intervenção", desc: "Reiki canaliza a cura para onde é necessário." },
-  { icon: BookOpen, titulo: "Recomendação", desc: "Banhos, cristais e práticas para o pós-sessão." },
-];
 
 const servicos = [
   {
@@ -33,16 +25,12 @@ const servicos = [
   },
 ];
 
-const AgendarPage = () => {
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
-  const [modalOpen, setModalOpen] = useState(false);
+const waLinks: Record<string, string> = {
+  "Pílula de Clareza": "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Vi%20no%20portal%20e%20gostaria%20de%20agendar%20uma%20P%C3%ADlula%20de%20Clareza.",
+  "Imersão Átmica Completa": "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Sinto%20que%20meu%20templo%20precisa%20de%20uma%20limpeza%20profunda.%20Gostaria%20de%20agendar%20a%20Imers%C3%A3o%20%C3%81tmica%20Completa.",
+};
 
-  const openModal = (nome: string) => {
-    setSelectedService(nome);
-    setSelectedDate(undefined);
-    setModalOpen(true);
-  };
+const AgendarPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
@@ -95,51 +83,19 @@ const AgendarPage = () => {
                   ))}
                 </ul>
 
-                <button onClick={() => openModal(s.nome)} className="btn-mystic w-full text-sm py-3 mt-auto">
+                <a
+                  href={waLinks[s.nome]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-mystic w-full text-sm py-3 mt-auto text-center block"
+                >
                   <CalendarIcon className="w-4 h-4 inline mr-2" /> Agendar
-                </button>
+                </a>
               </motion.div>
             ))}
           </div>
         </div>
       </main>
-
-      {/* Modal */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setModalOpen(false)} />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative glass-strong p-8 max-w-md w-full z-10"
-          >
-            <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors">
-              <X className="w-5 h-5" />
-            </button>
-            <h3 className="font-display text-2xl font-bold text-foreground mb-2">Agendar {selectedService}</h3>
-            <p className="text-muted-foreground font-body text-sm mb-6">Escolha uma data disponível para a sua sessão.</p>
-            <div className="flex justify-center mb-6">
-              <Calendar
-                mode="single"
-                selected={selectedDate}
-                onSelect={setSelectedDate}
-                disabled={(date) => date < new Date()}
-                className="p-3 pointer-events-auto glass rounded-xl"
-              />
-            </div>
-            {selectedDate && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
-                <p className="text-foreground font-body text-sm mb-4">
-                  Data selecionada: <span className="text-primary font-semibold">{selectedDate.toLocaleDateString("pt-BR")}</span>
-                </p>
-                <button onClick={() => setModalOpen(false)} className="btn-mystic w-full text-sm py-3">
-                  Confirmar Agendamento
-                </button>
-              </motion.div>
-            )}
-          </motion.div>
-        </div>
-      )}
 
       <Footer />
     </div>
