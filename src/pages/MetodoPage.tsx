@@ -14,7 +14,7 @@ const disciplinas = [
     icon: Eye,
     nome: "Oráculo de Kuan Yin",
     subtitulo: "Clareza e Compaixão",
-    descricao: "Consulta oracular canalizada pela energia compassiva de Kuan Yin, a Deusa da Misericórdia. Através das cartas e da intuição, revelamos mensagens que trazem clareza, direção e acolhimento para o seu momento presente. O Oráculo é o primeiro passo do Método Átmico — o mapa que guia toda a sessão.",
+    descricao: "Consulta oracular canalizada pela energia compassiva de Kuan Yin, a Deusa da Misericórdia. Através das cartas e da intuição, revelamos mensagens que trazem clareza, direção e acolhimento para o seu momento presente. O Oráculo é o primeiro passo do Método Átmico o mapa que guia toda a sessão.",
     imagem: kuanYinImg,
   },
   {
