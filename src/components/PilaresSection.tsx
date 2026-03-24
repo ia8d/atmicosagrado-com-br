@@ -1,31 +1,32 @@
-import { Heart, Radio, Zap, Moon } from "lucide-react";
+import { Heart, Radio, Zap, BookOpen } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const pilares = [
   {
     icon: Heart,
     title: "Kuan Yin",
-    subtitle: "Compaixão",
-    description: "Encontre a deusa interior e abra o coração para a cura através da compaixão infinita.",
+    subtitle: "Clareza e Decisões",
+    description: "Receba orientação direta do Oráculo para tomar decisões com confiança e clareza emocional.",
   },
   {
     icon: Radio,
     title: "Radiestesia",
-    subtitle: "Frequência",
-    description: "Alinhe seu campo energético através das frequências sagradas e vibrações sutis.",
+    subtitle: "Limpeza e Proteção",
+    description: "Identifique e remova bloqueios energéticos que drenam a sua vitalidade e travam o seu progresso.",
   },
   {
     icon: Zap,
     title: "Reiki",
-    subtitle: "Cura Energética",
-    description: "Conecte-se com a energia universal e permita que a cura flua através de você.",
+    subtitle: "Alívio de Stress e Energia",
+    description: "Dissolva tensões acumuladas e restaure a sua energia vital para viver com mais leveza e disposição.",
   },
   {
-    icon: Moon,
-    title: "Sagrado Feminino",
-    subtitle: "Essência",
-    description: "Reverencie os ciclos naturais e reconecte-se com a sabedoria ancestral feminina.",
+    icon: BookOpen,
+    title: "Registros Akáshicos",
+    subtitle: "Missão de Vida e Padrões",
+    description: "Acesse a sua história da alma para compreender padrões repetitivos e alinhar-se à sua missão de vida.",
   },
 ];
 
@@ -44,7 +45,7 @@ const PilaresSection = () => {
           className="text-center mb-16"
         >
           <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">
-            Caminhos de Cura
+            Como te ajudamos
           </p>
           <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground">
             Nossos Pilares
@@ -75,6 +76,20 @@ const PilaresSection = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-12"
+        >
+          <Link
+            to="/metodo"
+            className="btn-mystic inline-flex items-center gap-2 text-sm px-8 py-3"
+          >
+            Conheça o Método Átmico em detalhes
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
