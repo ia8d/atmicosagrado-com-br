@@ -33,16 +33,12 @@ const servicos = [
   },
 ];
 
-const AgendarPage = () => {
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
-  const [modalOpen, setModalOpen] = useState(false);
+const waLinks: Record<string, string> = {
+  "Pílula de Clareza": "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Vi%20no%20portal%20e%20gostaria%20de%20agendar%20uma%20P%C3%ADlula%20de%20Clareza.",
+  "Imersão Átmica Completa": "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Sinto%20que%20meu%20templo%20precisa%20de%20uma%20limpeza%20profunda.%20Gostaria%20de%20agendar%20a%20Imers%C3%A3o%20%C3%81tmica%20Completa.",
+};
 
-  const openModal = (nome: string) => {
-    setSelectedService(nome);
-    setSelectedDate(undefined);
-    setModalOpen(true);
-  };
+const AgendarPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
