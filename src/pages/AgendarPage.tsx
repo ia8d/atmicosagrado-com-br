@@ -26,7 +26,7 @@ const servicos = [
     icon: ShieldCheck,
     nome: "Imersão Átmica Completa",
     preco: "R$ 280",
-    duracao: "60 min",
+    duracao: "60 - 80 min",
     descricao: "Sessão integrativa que combina Oráculo, Reiki e Radiestesia para uma limpeza e proteção energética profunda. O Método Átmico em sua expressão plena.",
     destaques: ["Oráculo + Reiki + Radiestesia", "Limpeza e proteção profundas", "Relatório energético completo"],
     destaque: true,
