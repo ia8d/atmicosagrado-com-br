@@ -6,7 +6,9 @@ const servicos = [
   {
     icon: Gem,
     nome: "Pílula de Clareza",
+    precoOriginal: "R$ 100",
     preco: "R$ 69",
+    badge: "Valor de Lançamento",
     duracao: "30 min",
     descricao:
       "Foco em uma questão específica. Consulta com o Oráculo de Kuan Yin seguida de indicação personalizada de banhos, cristais e práticas de ancoragem para o seu momento.",
@@ -17,7 +19,9 @@ const servicos = [
   {
     icon: ShieldCheck,
     nome: "Imersão Átmica Completa",
+    precoOriginal: "R$ 180",
     preco: "R$ 120",
+    badge: "Oferta Especial",
     duracao: "60 – 80 min",
     descricao:
       "Sessão integrativa que combina Oráculo, Reiki e Radiestesia para uma limpeza e proteção energética profunda. O Método Átmico em sua expressão plena.",
