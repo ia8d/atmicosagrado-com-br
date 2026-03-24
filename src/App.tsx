@@ -7,7 +7,7 @@ import Index from "./pages/Index.tsx";
 import OraculoPage from "./pages/OraculoPage.tsx";
 import BlogPost from "./pages/BlogPost.tsx";
 import AgendarPage from "./pages/AgendarPage.tsx";
-import SantuarioPage from "./pages/SantuarioPage.tsx";
+
 import MetodoPage from "./pages/MetodoPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
