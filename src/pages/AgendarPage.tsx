@@ -54,11 +54,6 @@ const AgendarPage = () => {
           </Link>
 
           {/* Hero */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-20">
-            <Sparkles className="w-10 h-10 text-primary mx-auto mb-6 animate-float" />
-            <h1 className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4">Agende sua Sessão</h1>
-            <p className="text-muted-foreground font-body text-lg max-w-xl mx-auto">Cada atendimento é único, guiado pela sua energia e pelo Método Átmico.</p>
-          </motion.div>
 
           {/* A Jornada Átmica */}
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }} className="mb-24">
