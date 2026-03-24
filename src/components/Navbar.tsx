@@ -48,9 +48,9 @@ const Navbar = () => {
               </Link>
 
           )}
-          <Link to="/agendar" className="btn-mystic text-sm px-6 py-2.5">
+          <a href="https://wa.me/555391461889?text=Oi%2C%20gostaria%20de%20agendar%20uma%20sess%C3%A3o." target="_blank" rel="noopener noreferrer" className="btn-mystic text-sm px-6 py-2.5">
             Agendar Sessão
-          </Link>
+          </a>
         </div>
 
         {/* Mobile toggle */}
