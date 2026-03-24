@@ -1,28 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { Play, ExternalLink } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { extractYouTubeId } from "@/lib/youtube";
+import { ExternalLink } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+const FEATURED_VIDEOS = [
+  {
+    id: "dQw4w9WgXcQ",
+    title: "Título do seu vídeo 1",
+  },
+  {
+    id: "jNQXAC9IVRw",
+    title: "Título do seu vídeo 2",
+  },
+  {
+    id: "9bZkp7q19f0",
+    title: "Título do seu vídeo 3",
+  },
+];
 
 const VideosPreviewSection = () => {
   const { ref, isVisible } = useScrollReveal();
-
-  const { data: videos } = useQuery({
-    queryKey: ["videos-preview"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*")
-        .not("video_url", "is", null)
-        .order("published_at", { ascending: false })
-        .limit(4);
-      if (error) throw error;
-      return data;
-    },
-  });
-
-  if (!videos?.length) return null;
 
   return (
     <section className="py-24 md:py-32 relative">
@@ -33,68 +29,45 @@ const VideosPreviewSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">
             Conteúdo
           </p>
           <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground">
-            Últimos Vídeos
+            Destaques no YouTube
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {videos.map((video, i) => {
-            const ytId = video.video_url ? extractYouTubeId(video.video_url) : null;
-            const thumbnail = ytId
-              ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
-              : video.image_url;
-
-            return (
-              <motion.a
-                key={video.id}
-                href={video.video_url || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 40 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.12 }}
-                className="glass group overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 border border-border/50 hover:border-primary/30 shadow-lg shadow-background/50"
-              >
-                <div className="relative overflow-hidden aspect-video">
-                  {thumbnail && (
-                    <img
-                      src={thumbnail}
-                      alt={video.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-card/80 to-transparent" />
-
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <Play className="w-7 h-7 text-primary-foreground ml-0.5" fill="currentColor" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="font-display text-lg font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                    {video.title}
-                  </h3>
-                  {video.excerpt && (
-                    <p className="text-muted-foreground text-sm font-body leading-relaxed line-clamp-2 mt-2">
-                      {video.excerpt}
-                    </p>
-                  )}
-                </div>
-              </motion.a>
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          {FEATURED_VIDEOS.map((video, i) => (
+            <motion.div
+              key={video.id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: i * 0.12 }}
+              className="glass overflow-hidden border border-border/50 shadow-lg shadow-background/50 rounded-2xl"
+            >
+              <div className="aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.id}`}
+                  title={video.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="font-display text-sm font-semibold text-foreground line-clamp-2">
+                  {video.title}
+                </h3>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center">
           <a
             href="https://www.youtube.com/@atmico_sagrado"
             target="_blank"
