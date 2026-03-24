@@ -1,54 +1,106 @@
 import { useState } from "react";
-import { Search, Sparkles, ShieldCheck, CalendarIcon } from "lucide-react";
+import { Search, Sparkles, ShieldCheck, CalendarIcon, Instagram, Play } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { motion, AnimatePresence } from "framer-motion";
 
-const respostas = [
+type MediaType = "instagram" | "youtube";
+
+interface OracleResponse {
+  texto: string;
+  recomendacao: string;
+  servico: string;
+  media: {
+    type: MediaType;
+    url: string; // Instagram post URL or YouTube video ID
+    label: string;
+  };
+}
+
+const respostas: OracleResponse[] = [
   {
     texto: "A cura que você busca já vive em você. Permita-se sentir. O caminho para a plenitude não está fora, está na coragem de olhar para dentro com compaixão.",
     recomendacao: "Recomendo uma sessão de Mesa Radiônica para desbloquear os canais energéticos que estão impedindo o fluxo da sua cura interior.",
     servico: "imersao",
+    media: { type: "youtube", url: "dQw4w9WgXcQ", label: "Meditação Guiada — Cura Interior" },
   },
   {
     texto: "O universo conspira a seu favor. Confie no processo. Cada desafio é um portal de transformação que a vida oferece para que você se torne quem realmente é.",
     recomendacao: "Uma prática de Reiki pode ajudá-la a alinhar a energia com a frequência do universo e sentir essa confiança no corpo.",
     servico: "reiki",
+    media: { type: "instagram", url: "https://www.instagram.com/p/EXAMPLE1/", label: "Energia Reiki — @portal.atmico" },
   },
   {
     texto: "Seu coração sabe o caminho. Silencie a mente e ouça. A sabedoria ancestral que habita em você é mais antiga que qualquer dúvida.",
     recomendacao: "Sugiro uma consulta com o Oráculo de Kuan Yin para aprofundar essa conexão com a voz do seu coração.",
     servico: "pilula",
+    media: { type: "youtube", url: "dQw4w9WgXcQ", label: "Oráculo de Kuan Yin — Conexão Sagrada" },
   },
   {
     texto: "A compaixão é a chave. Comece por si mesma. Quando você se permite receber, o universo inteiro se reorganiza ao seu redor.",
     recomendacao: "Uma sessão de Reiki vai ajudar a abrir o canal do amor-próprio e restaurar a energia do seu campo áurico.",
     servico: "reiki",
+    media: { type: "instagram", url: "https://www.instagram.com/p/EXAMPLE2/", label: "Amor-Próprio — @portal.atmico" },
   },
   {
     texto: "Cada ciclo traz renovação. Honre o que precisa partir. A luz que você procura já brilha dentro de você.",
     recomendacao: "A Imersão Átmica Completa é ideal para este momento de transição — integrando Oráculo, Reiki e Radiestesia.",
     servico: "imersao",
+    media: { type: "youtube", url: "dQw4w9WgXcQ", label: "Imersão Átmica — Transformação Profunda" },
   },
   {
     texto: "Permita que a vulnerabilidade seja sua maior força. O sagrado habita nos pequenos momentos de presença.",
     recomendacao: "Uma Pílula de Clareza pode trazer a orientação prática que você precisa agora, com banhos e cristais personalizados.",
     servico: "pilula",
+    media: { type: "instagram", url: "https://www.instagram.com/p/EXAMPLE3/", label: "Cristais & Clareza — @portal.atmico" },
   },
 ];
 
 const waLinks: Record<string, string> = {
-  reiki:
-    "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20Reiki.",
-  pilula:
-    "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Vi%20no%20portal%20e%20gostaria%20de%20agendar%20uma%20P%C3%ADlula%20de%20Clareza.",
-  imersao:
-    "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Sinto%20que%20meu%20templo%20precisa%20de%20uma%20limpeza%20profunda.%20Gostaria%20de%20agendar%20a%20Imers%C3%A3o%20%C3%81tmica%20Completa.",
+  reiki: "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20Reiki.",
+  pilula: "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Vi%20no%20portal%20e%20gostaria%20de%20agendar%20uma%20P%C3%ADlula%20de%20Clareza.",
+  imersao: "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Sinto%20que%20meu%20templo%20precisa%20de%20uma%20limpeza%20profunda.%20Gostaria%20de%20agendar%20a%20Imers%C3%A3o%20%C3%81tmica%20Completa.",
+};
+
+const MediaEmbed = ({ media }: { media: OracleResponse["media"] }) => {
+  if (media.type === "youtube") {
+    return (
+      <div className="glass p-3 mb-8 overflow-hidden rounded-2xl">
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+          <iframe
+            src={`https://www.youtube.com/embed/${media.url}`}
+            title={media.label}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+          />
+        </div>
+        <p className="text-muted-foreground text-xs font-body text-center mt-3 flex items-center justify-center gap-1.5">
+          <Play className="w-3 h-3" /> {media.label}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <a
+      href={media.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="glass p-6 flex flex-col items-center justify-center gap-3 mb-8 group hover:border-primary/30 transition-colors cursor-pointer"
+    >
+      <Instagram className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
+      <p className="text-muted-foreground font-body text-sm text-center group-hover:text-foreground transition-colors">
+        {media.label}
+      </p>
+      <span className="text-xs text-muted-foreground/60 font-body">@portal.atmico</span>
+    </a>
+  );
 };
 
 const OraculoSection = () => {
   const { ref, isVisible } = useScrollReveal();
   const [query, setQuery] = useState("");
-  const [resultado, setResultado] = useState<(typeof respostas)[0] | null>(null);
+  const [resultado, setResultado] = useState<OracleResponse | null>(null);
   const [isChanneling, setIsChanneling] = useState(false);
 
   const handleConsultar = () => {
@@ -78,9 +130,7 @@ const OraculoSection = () => {
           className="text-center"
         >
           <Sparkles className="w-8 h-8 text-primary mx-auto mb-6 animate-float" />
-          <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">
-            O Oráculo
-          </p>
+          <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4">O Oráculo</p>
           <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
             O que seu coração precisa ouvir hoje?
           </h2>
@@ -106,11 +156,7 @@ const OraculoSection = () => {
               placeholder="Faça sua pergunta ao universo..."
               className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground font-body py-4 text-sm"
             />
-            <button
-              onClick={handleConsultar}
-              disabled={isChanneling}
-              className="btn-mystic text-sm px-6 py-3 shrink-0"
-            >
+            <button onClick={handleConsultar} disabled={isChanneling} className="btn-mystic text-sm px-6 py-3 shrink-0">
               Consultar
             </button>
           </div>
@@ -148,7 +194,7 @@ const OraculoSection = () => {
           )}
         </AnimatePresence>
 
-        {/* Detailed result */}
+        {/* Result */}
         <AnimatePresence>
           {resultado && !isChanneling && (
             <motion.div
@@ -161,7 +207,7 @@ const OraculoSection = () => {
               <div className="glass p-8 md:p-10">
                 {/* Raquel header */}
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center shadow-[0_0_20px_hsl(330_100%_44%/0.4)]">
+                  <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
                     <Sparkles className="w-5 h-5 text-primary-foreground" />
                   </div>
                   <div>
@@ -183,10 +229,13 @@ const OraculoSection = () => {
                   <p className="text-foreground font-body leading-relaxed">{resultado.recomendacao}</p>
                 </div>
 
+                {/* Media embed */}
+                <MediaEmbed media={resultado.media} />
+
                 {/* CTA Imersão */}
                 <div className="glass p-6 rounded-2xl border border-primary/20 mb-8">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center shrink-0 shadow-[0_0_20px_hsl(330_100%_44%/0.4)]">
+                    <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center shrink-0 shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
                       <ShieldCheck className="w-6 h-6 text-primary-foreground" />
                     </div>
                     <div>
@@ -199,7 +248,7 @@ const OraculoSection = () => {
                         href={waLinks[resultado.servico]}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-mystic inline-flex items-center gap-2 text-sm px-6 py-3 shadow-[0_0_20px_hsl(330_100%_44%/0.4)] hover:shadow-[0_0_35px_hsl(330_100%_44%/0.6)]"
+                        className="btn-mystic inline-flex items-center gap-2 text-sm px-6 py-3 shadow-[0_0_20px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.6)]"
                       >
                         <CalendarIcon className="w-4 h-4" /> Agendar Sessão
                       </a>
@@ -213,7 +262,7 @@ const OraculoSection = () => {
                     href={waLinks[resultado.servico]}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-mystic text-center flex-1 flex items-center justify-center gap-2 shadow-[0_0_20px_hsl(330_100%_44%/0.4)]"
+                    className="btn-mystic text-center flex-1 flex items-center justify-center gap-2 shadow-[0_0_20px_hsl(var(--primary)/0.4)]"
                   >
                     <CalendarIcon className="w-4 h-4" /> Agendar Agora
                   </a>

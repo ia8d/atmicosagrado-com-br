@@ -1,28 +1,89 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, Instagram, ArrowLeft, Send, ShieldCheck } from "lucide-react";
+import { Sparkles, Instagram, ArrowLeft, Send, ShieldCheck, Play, CalendarIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const respostas = [
+type MediaType = "instagram" | "youtube";
+
+interface OracleResponse {
+  texto: string;
+  recomendacao: string;
+  servico: string;
+  media: {
+    type: MediaType;
+    url: string;
+    label: string;
+  };
+}
+
+const respostas: OracleResponse[] = [
   {
     texto: "A cura que você busca já vive em você. Permita-se sentir. O caminho para a plenitude não está fora, está na coragem de olhar para dentro com compaixão.",
     recomendacao: "Recomendo uma sessão de Mesa Radiônica para desbloquear os canais energéticos que estão impedindo o fluxo da sua cura interior.",
+    servico: "imersao",
+    media: { type: "youtube", url: "dQw4w9WgXcQ", label: "Meditação Guiada — Cura Interior" },
   },
   {
     texto: "O universo conspira a seu favor. Confie no processo. Cada desafio é um portal de transformação que a vida oferece para que você se torne quem realmente é.",
     recomendacao: "Uma prática de Reiki pode ajudá-la a alinhar a energia com a frequência do universo e sentir essa confiança no corpo.",
+    servico: "reiki",
+    media: { type: "instagram", url: "https://www.instagram.com/p/EXAMPLE1/", label: "Energia Reiki — @portal.atmico" },
   },
   {
     texto: "Seu coração sabe o caminho. Silencie a mente e ouça. A sabedoria ancestral que habita em você é mais antiga que qualquer dúvida.",
     recomendacao: "Sugiro uma consulta com o Oráculo de Kuan Yin para aprofundar essa conexão com a voz do seu coração.",
+    servico: "pilula",
+    media: { type: "youtube", url: "dQw4w9WgXcQ", label: "Oráculo de Kuan Yin — Conexão Sagrada" },
   },
 ];
 
+const waLinks: Record<string, string> = {
+  reiki: "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Gostaria%20de%20agendar%20uma%20sess%C3%A3o%20de%20Reiki.",
+  pilula: "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Vi%20no%20portal%20e%20gostaria%20de%20agendar%20uma%20P%C3%ADlula%20de%20Clareza.",
+  imersao: "https://wa.me/555391461889?text=Ol%C3%A1%20Raquel!%20Sinto%20que%20meu%20templo%20precisa%20de%20uma%20limpeza%20profunda.%20Gostaria%20de%20agendar%20a%20Imers%C3%A3o%20%C3%81tmica%20Completa.",
+};
+
+const MediaEmbed = ({ media }: { media: OracleResponse["media"] }) => {
+  if (media.type === "youtube") {
+    return (
+      <div className="glass p-3 mb-8 overflow-hidden rounded-2xl">
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+          <iframe
+            src={`https://www.youtube.com/embed/${media.url}`}
+            title={media.label}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+          />
+        </div>
+        <p className="text-muted-foreground text-xs font-body text-center mt-3 flex items-center justify-center gap-1.5">
+          <Play className="w-3 h-3" /> {media.label}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <a
+      href={media.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="glass p-6 flex flex-col items-center justify-center gap-3 mb-8 group hover:border-primary/30 transition-colors cursor-pointer"
+    >
+      <Instagram className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
+      <p className="text-muted-foreground font-body text-sm text-center group-hover:text-foreground transition-colors">
+        {media.label}
+      </p>
+      <span className="text-xs text-muted-foreground/60 font-body">@portal.atmico</span>
+    </a>
+  );
+};
+
 const OraculoPage = () => {
   const [pergunta, setPergunta] = useState("");
-  const [resultado, setResultado] = useState<(typeof respostas)[0] | null>(null);
+  const [resultado, setResultado] = useState<OracleResponse | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleConsultar = () => {
@@ -77,7 +138,7 @@ const OraculoPage = () => {
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
               <div className="glass p-8 md:p-12 mb-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full gradient-bg flex items-center justify-center shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
                     <Sparkles className="w-5 h-5 text-primary-foreground" />
                   </div>
                   <div>
@@ -86,7 +147,6 @@ const OraculoPage = () => {
                   </div>
                 </div>
 
-                {/* Prévia da resposta */}
                 <blockquote className="font-display text-xl md:text-2xl italic text-foreground leading-relaxed mb-8 pl-6 border-l-2 border-primary/50">
                   "{resultado.texto}"
                 </blockquote>
@@ -96,7 +156,10 @@ const OraculoPage = () => {
                   <p className="text-foreground font-body leading-relaxed">{resultado.recomendacao}</p>
                 </div>
 
-                {/* CTA Imersão Átmica */}
+                {/* Media embed */}
+                <MediaEmbed media={resultado.media} />
+
+                {/* CTA Imersão */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -104,32 +167,35 @@ const OraculoPage = () => {
                   className="glass p-6 rounded-2xl border border-primary/20 mb-8"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center shrink-0 shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
                       <ShieldCheck className="w-6 h-6 text-primary-foreground" />
                     </div>
                     <div>
                       <p className="font-display text-foreground font-semibold text-lg mb-1">Quer ir mais fundo?</p>
                       <p className="text-muted-foreground font-body text-sm leading-relaxed mb-4">
-                        Para uma visão profunda e limpeza energética, agende sua <span className="text-primary font-semibold">Imersão Átmica Completa</span> — integrando Oráculo, Reiki e Radiestesia em uma sessão transformadora.
+                        Para uma visão profunda e limpeza energética, agende sua <span className="text-primary font-semibold">Imersão Átmica Completa</span> — integrando Oráculo, Reiki e Radiestesia.
                       </p>
-                      <Link to="/agendar" className="btn-mystic inline-flex items-center gap-2 text-sm px-6 py-3">
-                        Agendar Imersão Átmica
-                      </Link>
+                      <a
+                        href={waLinks[resultado.servico]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-mystic inline-flex items-center gap-2 text-sm px-6 py-3 shadow-[0_0_20px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.6)]"
+                      >
+                        <CalendarIcon className="w-4 h-4" /> Agendar Imersão Átmica
+                      </a>
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Instagram Embed Placeholder */}
-                <div className="glass p-6 flex flex-col items-center justify-center gap-3 mb-8">
-                  <Instagram className="w-8 h-8 text-muted-foreground" />
-                  <p className="text-muted-foreground font-body text-sm text-center">Post relacionado do Instagram será exibido aqui</p>
-                  <span className="text-xs text-muted-foreground/60 font-body">@portal.atmico</span>
-                </div>
-
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Link to="/agendar" className="btn-mystic text-center flex-1 flex items-center justify-center gap-2">
-                    Agendar Sessão
-                  </Link>
+                  <a
+                    href={waLinks[resultado.servico]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-mystic text-center flex-1 flex items-center justify-center gap-2 shadow-[0_0_20px_hsl(var(--primary)/0.4)]"
+                  >
+                    <CalendarIcon className="w-4 h-4" /> Agendar Agora
+                  </a>
                   <button onClick={() => { setResultado(null); setPergunta(""); }} className="flex-1 glass text-foreground font-body font-semibold py-4 px-6 rounded-full hover:bg-secondary/40 transition-all text-center">
                     Fazer Nova Pergunta
                   </button>
