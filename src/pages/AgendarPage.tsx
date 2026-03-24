@@ -68,26 +68,6 @@ const AgendarPage = () => {
               O atendimento é intuitivo e integrado. Oráculo, Reiki e Radiestesia se combinam de forma orgânica conforme a necessidade energética revelada durante a sessão.
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-              {fluxo.map((step, i) => (
-                <motion.div
-                  key={step.titulo}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
-                  className="glass glow-hover p-6 text-center relative"
-                >
-                  {i < fluxo.length - 1 && (
-                    <span className="hidden md:block absolute top-1/2 -right-3 md:-right-4 -translate-y-1/2 text-primary text-xl font-bold">➔</span>
-                  )}
-                  <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mx-auto mb-4">
-                    <step.icon className="w-5 h-5 text-primary-foreground" />
-                  </div>
-                  <h3 className="font-display text-base font-bold text-foreground mb-1">{step.titulo}</h3>
-                  <p className="text-muted-foreground font-body text-xs leading-relaxed">{step.desc}</p>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
 
           {/* Service Cards */}
