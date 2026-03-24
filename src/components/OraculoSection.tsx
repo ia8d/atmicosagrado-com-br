@@ -62,6 +62,7 @@ const waLinks: Record<string, string> = {
 };
 
 const MediaEmbed = ({ media }: { media: OracleResponse["media"] }) => {
+  if (!media) return null;
   if (media.type === "youtube") {
     return (
       <div className="glass p-3 mb-8 overflow-hidden rounded-2xl">
