@@ -58,13 +58,9 @@ const VideosPreviewSection = () => {
                   loading="lazy"
                 />
               </div>
-              <div className="p-4">
-                <h3 className="font-display text-sm font-semibold text-foreground line-clamp-2">
-                  {video.title}
-                </h3>
-              </div>
             </motion.div>
           ))}
+        </div>
         </div>
 
         <div className="text-center">
