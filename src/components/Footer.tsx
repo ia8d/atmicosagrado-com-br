@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { Sparkles, Heart } from "lucide-react";
 
-const Footer = () => (
-  <footer id="agendar" className="py-16 border-t border-border/30">
+const Footer = () =>
+<footer id="agendar" className="py-16 border-t border-border/30">
     <div className="container mx-auto px-6 text-center">
       <Sparkles className="w-6 h-6 text-primary mx-auto mb-6" />
       <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-4">
-        Pronta para despertar?
+        Pronta (o) para despertar?
       </h2>
       <p className="text-muted-foreground font-body mb-8 max-w-md mx-auto">
         Agende uma sessão e dê o primeiro passo na sua jornada de cura e autoconhecimento.
@@ -23,7 +23,7 @@ const Footer = () => (
         </p>
       </div>
     </div>
-  </footer>
-);
+  </footer>;
+
 
 export default Footer;
