@@ -61,9 +61,6 @@ const PilaresSection = () => {
               transition={{ duration: 0.6, delay: i * 0.15 }}
               className="glass glow-hover group p-8 text-center cursor-pointer transition-all duration-500 hover:-translate-y-2"
             >
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                <pilar.icon className="w-7 h-7 text-primary" />
-              </div>
               <h3 className="font-display text-xl font-semibold text-foreground mb-1">
                 {pilar.title}
               </h3>
