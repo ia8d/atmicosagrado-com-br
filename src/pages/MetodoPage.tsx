@@ -124,12 +124,6 @@ const MetodoPage = () => {
           </div>
 
 
-          {/* CTA */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="text-center mt-20">
-            <Link to="/agendar" className="btn-mystic inline-flex items-center gap-2 text-base px-8 py-4">
-              <Sparkles className="w-5 h-5" /> Agendar uma Sessão
-            </Link>
-          </motion.div>
         </div>
       </main>
       <Footer />
