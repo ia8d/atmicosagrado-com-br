@@ -91,9 +91,14 @@ const AgendarPage = () => {
                   ))}
                 </ul>
 
-                <button onClick={() => openModal(s.nome)} className="btn-mystic w-full text-sm py-3 mt-auto">
+                <a
+                  href={waLinks[s.nome]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-mystic w-full text-sm py-3 mt-auto text-center block"
+                >
                   <CalendarIcon className="w-4 h-4 inline mr-2" /> Agendar
-                </button>
+                </a>
               </motion.div>
             ))}
           </div>
