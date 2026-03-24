@@ -59,7 +59,7 @@ const PilaresSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="glass glow-hover group p-8 text-center cursor-pointer transition-all duration-500 hover:-translate-y-2"
+              className="glass glow-hover group p-8 text-center cursor-pointer transition-all duration-500 hover:-translate-y-2 flex flex-col"
             >
               <h3 className="font-display text-xl font-semibold text-foreground mb-1">
                 {pilar.title}
@@ -67,9 +67,15 @@ const PilaresSection = () => {
               <p className="text-primary text-sm font-body mb-3">
                 {pilar.subtitle}
               </p>
-              <p className="text-muted-foreground text-sm font-body leading-relaxed">
+              <p className="text-muted-foreground text-sm font-body leading-relaxed mb-5">
                 {pilar.description}
               </p>
+              <a
+                href="#servicos"
+                className="mt-auto inline-block text-xs font-body font-semibold text-primary border border-primary/30 rounded-full px-4 py-1.5 hover:bg-primary/10 hover:shadow-[0_0_15px_hsl(330_100%_44%/0.3)] transition-all duration-300"
+              >
+                Agendar esta Cura
+              </a>
             </motion.div>
           ))}
         </div>

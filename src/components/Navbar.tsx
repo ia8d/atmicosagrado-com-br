@@ -3,11 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sparkles } from "lucide-react";
 
 const navItems = [
-{ label: "Pilares", href: "/#pilares" },
-{ label: "O Método", href: "/metodo" },
-{ label: "O Oráculo", href: "/oraculo" },
-{ label: "Evolução", href: "/#evolucao" },
-{ label: "Agendar", href: "/agendar" },
+  { label: "Pilares", href: "/#pilares" },
+  { label: "O Método", href: "/metodo" },
+  { label: "O Oráculo", href: "/oraculo" },
+  { label: "Evolução", href: "/#evolucao" },
+  { label: "Agendar", href: "/#servicos" },
 ];
 
 

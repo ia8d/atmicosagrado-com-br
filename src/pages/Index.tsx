@@ -1,9 +1,11 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import PilaresSection from "@/components/PilaresSection";
+import ServicosSection from "@/components/ServicosSection";
 import OraculoSection from "@/components/OraculoSection";
 import FeedEvolucao from "@/components/FeedEvolucao";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const Index = () => {
   return (
@@ -12,8 +14,10 @@ const Index = () => {
       <HeroSection />
       <OraculoSection />
       <PilaresSection />
+      <ServicosSection />
       <FeedEvolucao />
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };
