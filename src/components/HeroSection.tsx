@@ -9,8 +9,8 @@ const HeroSection = () => {
         <img
           src={heroBg}
           alt="Cosmos sagrado"
-          className="w-full h-full object-cover"
-        />
+          className="w-full h-full object-cover" />
+        
         <div className="absolute inset-0 bg-background/70" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
       </div>
@@ -23,17 +23,17 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-6"
-        >
-          Portal Átmico Sagrado
+          className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-6">
+          
+          ​
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-6 text-foreground"
-        >
+          className="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-6 text-foreground">
+          
           Cure o templo para, finalmente,{" "}
           <span className="gradient-text italic">ouvir a alma.</span>
         </motion.h1>
@@ -42,8 +42,8 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-balance"
-        >
+          className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-balance">
+          
           Desperte sua essência em um espaço sagrado de cura, frequência e
           compaixão.
         </motion.p>
@@ -51,8 +51,8 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
+          transition={{ duration: 0.8, delay: 0.6 }}>
+          
           <a href="#pilares" className="btn-mystic text-base inline-block">
             Comece sua Jornada
           </a>
@@ -63,14 +63,14 @@ const HeroSection = () => {
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
+        transition={{ duration: 2, repeat: Infinity }}>
+        
         <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2">
           <div className="w-1 h-2 rounded-full bg-primary" />
         </div>
       </motion.div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default HeroSection;
