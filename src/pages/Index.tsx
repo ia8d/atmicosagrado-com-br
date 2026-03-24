@@ -2,10 +2,9 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import PilaresSection from "@/components/PilaresSection";
 import ServicosSection from "@/components/ServicosSection";
-
-import FeedEvolucao from "@/components/FeedEvolucao";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import BlogPreviewSection from "@/components/BlogPreviewSection";
 
 const Index = () => {
   return (
@@ -14,7 +13,7 @@ const Index = () => {
       <HeroSection />
       <PilaresSection />
       <ServicosSection />
-      <FeedEvolucao />
+      <BlogPreviewSection />
       <Footer />
       <FloatingWhatsApp />
     </div>
