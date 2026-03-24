@@ -108,9 +108,6 @@ const MetodoPage = () => {
                   {/* Texto */}
                   <div className="w-full md:w-1/2">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center shrink-0">
-                        <d.icon className="w-5 h-5 text-primary-foreground" />
-                      </div>
                       <div>
                         <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">{d.nome}</h2>
                         <p className="text-primary font-body text-sm">{d.subtitulo}</p>
