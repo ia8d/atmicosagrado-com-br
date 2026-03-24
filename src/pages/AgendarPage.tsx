@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Sparkles, Search, Stethoscope, ShieldCheck, BookOpen, Zap, Gem, CalendarIcon, X } from "lucide-react";
+import { ArrowLeft, Sparkles, ShieldCheck, Gem, CalendarIcon } from "lucide-react";
 import { motion } from "framer-motion";
-import { Calendar } from "@/components/ui/calendar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
