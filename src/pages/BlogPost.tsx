@@ -156,7 +156,7 @@ const BlogPost = () => {
                 prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground
                 prose-img:rounded-xl"
             >
-              <ReactMarkdown>{post.content}</ReactMarkdown>
+              <ReactMarkdown>{post.content.replace(/\n(?!\n)/g, '  \n')}</ReactMarkdown>
             </div>
 
             {/* Share — single block at the bottom */}
