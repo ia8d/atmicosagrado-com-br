@@ -147,7 +147,7 @@ const BlogPost = () => {
 
             {/* Content */}
             <div
-              className="prose prose-invert prose-lg max-w-none font-body
+              className="prose prose-invert prose-lg max-w-none font-body whitespace-pre-line
                 prose-headings:font-display prose-headings:text-foreground
                 prose-p:text-foreground/90 prose-p:leading-relaxed
                 prose-a:text-primary prose-a:no-underline hover:prose-a:underline
