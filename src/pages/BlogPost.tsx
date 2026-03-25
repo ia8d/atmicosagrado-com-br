@@ -148,15 +148,16 @@ const BlogPost = () => {
 
             {/* Content */}
             <div
-              className="prose prose-invert prose-lg max-w-none font-body whitespace-pre-line
+              className="prose prose-invert prose-lg max-w-none font-body
                 prose-headings:font-display prose-headings:text-foreground
                 prose-p:text-foreground/90 prose-p:leading-relaxed
                 prose-a:text-primary prose-a:no-underline hover:prose-a:underline
                 prose-strong:text-foreground prose-strong:font-semibold
                 prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground
                 prose-img:rounded-xl"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            >
+              <ReactMarkdown>{post.content}</ReactMarkdown>
+            </div>
 
             {/* Share — single block at the bottom */}
             <div className="mt-14">
