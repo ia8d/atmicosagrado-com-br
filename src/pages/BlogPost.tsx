@@ -149,11 +149,16 @@ const BlogPost = () => {
             {/* Content */}
             <div
               className="prose prose-invert prose-lg max-w-none font-body
-                prose-headings:font-display prose-headings:text-foreground
-                prose-p:text-foreground/90 prose-p:leading-relaxed
+                prose-headings:font-display prose-headings:text-primary prose-headings:mt-10 prose-headings:mb-5
+                prose-h2:text-[1.75rem] prose-h2:font-bold
+                prose-h3:text-[1.35rem] prose-h3:font-semibold
+                prose-p:text-foreground/90 prose-p:leading-[1.8] prose-p:mb-6
                 prose-a:text-primary prose-a:no-underline hover:prose-a:underline
                 prose-strong:text-foreground prose-strong:font-semibold
                 prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground
+                prose-ul:list-disc prose-ul:ml-6 prose-ul:mb-6
+                prose-ol:list-decimal prose-ol:ml-6 prose-ol:mb-6
+                prose-li:text-foreground/90 prose-li:mb-2
                 prose-img:rounded-xl"
             >
               <ReactMarkdown>{post.content.replace(/\n(?!\n)/g, '  \n')}</ReactMarkdown>
