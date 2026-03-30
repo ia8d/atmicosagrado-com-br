@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const ArticlesPreviewSection = () => {
-  const { ref, isVisible } = useScrollReveal();
+  const { ref, isVisible } = useScrollReveal(0.05);
 
   const { data: posts } = useQuery({
     queryKey: ["articles-preview"],
