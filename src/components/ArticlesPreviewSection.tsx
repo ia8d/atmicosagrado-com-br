@@ -3,10 +3,27 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useEffect, useRef, useState } from "react";
 
 const ArticlesPreviewSection = () => {
-  const { ref, isVisible } = useScrollReveal(0.05);
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  });
 
   const { data: posts } = useQuery({
     queryKey: ["articles-preview"],
