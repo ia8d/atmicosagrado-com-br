@@ -3,28 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useEffect, useRef, useState } from "react";
 
 const ArticlesPreviewSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.05 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  });
-
   const { data: posts } = useQuery({
     queryKey: ["articles-preview"],
     queryFn: async () => {
@@ -41,16 +21,15 @@ const ArticlesPreviewSection = () => {
 
   if (!posts?.length) return null;
 
-  
-
   return (
     <section className="py-24 md:py-32 relative">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
-      <div ref={ref} className="container mx-auto px-6">
+      <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
@@ -67,7 +46,8 @@ const ArticlesPreviewSection = () => {
             <Link to={`/blog/${post.slug}`} key={post.id}>
               <motion.article
                 initial={{ opacity: 0, y: 40 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 className="glass group overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 h-full border border-border/50 hover:border-primary/30 shadow-lg shadow-background/50"
               >
