@@ -27,12 +27,13 @@ const Navbar = () => {
       }>
       
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link to="/" className="flex items-center gap-3 group">
           <img 
             src="https://tmjwjhympdpnhspxhlhz.supabase.co/storage/v1/object/public/blog-images/logo%20site.png" 
             alt="Átmico Sagrado" 
             className="h-10 w-auto transition-transform duration-300 group-hover:scale-105" 
           />
+          <span className="text-lg font-heading font-semibold text-foreground tracking-wide">Átmico Sagrado</span>
         </Link>
 
         {/* Desktop */}
