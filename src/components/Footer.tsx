@@ -6,7 +6,7 @@ const WA_GENERIC = "https://wa.me/555391461889?text=Oi%2C%20gostaria%20de%20agen
 const Footer = () =>
   <footer id="agendar" className="py-16 border-t border-border/30">
     <div className="container mx-auto px-6 text-center">
-      <Sparkles className="w-6 h-6 text-primary mx-auto mb-6" />
+      
       <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground mb-4">
         Pronta (o) para despertar?
       </h2>
