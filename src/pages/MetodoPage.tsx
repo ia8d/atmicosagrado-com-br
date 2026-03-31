@@ -66,7 +66,7 @@ const MetodoPage = () => {
 
           {/* Hero */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center mb-24">
-            <Sparkles className="w-10 h-10 text-primary mx-auto mb-6 animate-float" />
+            
             <h1 className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4">O Método Átmico</h1>
             <p className="text-muted-foreground font-body text-lg max-w-2xl mx-auto">
               Uma abordagem intuitiva e integrada de cura. Cada ferramenta é usada conforme a sua energia pede sem rigidez, com compaixão.
